@@ -3,8 +3,8 @@
 Plugin Name: Add Logo to Admin
 Plugin URI: http://bavotasan.com/2011/add-your-logo-to-the-wordpress-admin-and-login-page/
 Description: Adds a custom logo to your wp-admin and login page.
-Author: c.bavota
-Version: 1.6.2
+Author: c.bavota, davorpatech
+Version: 1.7.0
 Author URI: http://bavotasan.com
 Text Domain: add-logo-to-admin
 Domain Path: /languages
@@ -29,7 +29,7 @@ License: GPL2
 
 // Plugin version
 if ( ! defined( 'ADD_LOGO_VERSION' ) ) {
-	define( 'ADD_LOGO_VERSION', '1.6.2' );
+	define( 'ADD_LOGO_VERSION', '1.7.0' );
 }
 
 if ( ! class_exists( 'WP_Add_Logo_To_Admin' ) ) {
@@ -39,14 +39,20 @@ if ( ! class_exists( 'WP_Add_Logo_To_Admin' ) ) {
          */
         public function __construct() {
             $plugin_options = get_option( 'wp_add_logo_to_admin' );
-
+            $wp_version = get_bloginfo( 'version' );
+            
             add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
             add_action( 'admin_init', array( $this, 'admin_init' ) );
             add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 
             if ( 'on' == $plugin_options['login'] ) {
-            	add_action( 'login_enqueue_scripts', array( $this, 'login_enqueue_scripts' ) );
-                add_filter( 'login_headertitle', array( $this, 'login_headertitle' ) );
+                add_action( 'login_enqueue_scripts', array( $this, 'login_enqueue_scripts' ) );
+                // WP5.2.0 DEPRECATED: https://developer.wordpress.org/reference/hooks/login_headertitle/
+                if (version_compare($wp_version, '5.2.0') >= 0) {
+                    add_filter( 'login_headertext', array( $this, 'login_headertitle' ) );
+                } else {
+                    add_filter( 'login_headertitle', array( $this, 'login_headertitle' ) );
+                }
                 add_filter( 'login_headerurl', array( $this, 'login_headerurl' ) );
             }
 
@@ -107,10 +113,11 @@ if ( ! class_exists( 'WP_Add_Logo_To_Admin' ) ) {
         function login_enqueue_scripts() {
             $plugin_options = get_option( 'wp_add_logo_to_admin' );
         	if ( $image = $plugin_options['image' ] ) { ?>
-<style>
+<style type="text/css">
 body.login div#login h1 a {
     background-image: url(<?php echo esc_url( $image ); ?>);
     background-size: inherit;
+    background-size: contain;
     width: 100%;
 }
 </style>

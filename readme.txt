@@ -1,12 +1,12 @@
 === Add Logo to Admin ===
-Contributors: tinkerpriest
+Contributors: tinkerpriest, davorpatech
 Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4W58JWNBHWKK4
 Tags: custom logo, admin, login, wp-admin, admin logo
 Text Domain: add-logo
 Domain Path: /languages
 Requires at least: 3.5
-Tested up to: 4.3.1
-Stable tag: 1.6.2
+Tested up to: 5.2.0
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,6 +39,11 @@ Your logo shouldn't exceed 320px by 80px or it will be resized on the login scre
 2. How your logo will appear on the login screen
 
 == Change Log ==
+
+= 1.7.0 (2020-04-13) = 
+
+* Fixed compatibility warnings on Wordpress 5.2.0+ about
+  https://developer.wordpress.org/reference/hooks/login_headertitle/
 
 = 1.6.2 (2015-09-30) =
 
