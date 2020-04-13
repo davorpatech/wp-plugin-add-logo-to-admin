@@ -5,8 +5,7 @@
 		    e.preventDefault();
 
 			// Let's start over to make sure everything works
-		    if ( file_frame )
-		        file_frame.remove();
+		    file_frame && file_frame.remove();
 
 		    file_frame = wp.media.frames.file_frame = wp.media( {
 		        title: $(this).data( 'uploader_title' ),
