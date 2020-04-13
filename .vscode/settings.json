@@ -6,6 +6,23 @@
         "php",
         "markdown",
         "latex",
-        "plaintext"
+        "css",
+        "javascript"
+    ],
+    "cSpell.language": "en",
+    "cSpell.dictionaries": [
+        "php",
+        "markdown",
+        "latex",
+        "css",
+        "javascript"
+    ],
+    "cSpell.words": [
+        "Wordpress",
+        "bavota",
+        "davorpa",
+        "davorpatech",
+        "tinkerpriest",
+        "uploader"
     ]
 }
